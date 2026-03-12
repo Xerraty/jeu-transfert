@@ -84,7 +84,7 @@ if "message" not in st.session_state:
 # INTERFACE
 # ============================================================
 st.title("⚽ Devine le joueur !")
-musique_fond("C:/Users/Mathieu/Documents/python/Jeu_transfert/musique_stade.mp3")
+musique_fond("musique_stade.mp3")
 # ── Étape 1 : Paramètre prix ────────────────────────────────
 st.markdown("### 🎯 Paramètres")
 prix = st.number_input("Valeur de marché minimale (€)", min_value=0, value=10_000_000, step=1_000_000)

@@ -119,7 +119,10 @@ if st.session_state.partie_lancee:
 
     # ── Fin de partie ──────────────────────────────────────
     if st.session_state.gagne:
-        st.success(f"🏆 Bravo ! C'était bien **{st.session_state.joueur}** !")
+        if st.session_state.essais == 1:
+            st.success(f"🏆Machine de guerre ! C'était bien **{st.session_state.joueur}** !")
+        else:
+            st.success(f"🏆 Bravo ! C'était bien **{st.session_state.joueur}** !")
         if st.button("🔄 Nouvelle partie"):
             tirer_joueur(prix)
             st.rerun()

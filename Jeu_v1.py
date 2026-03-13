@@ -148,7 +148,7 @@ if st.session_state.partie_lancee:
                 st.session_state.essais += 1
                 if normaliser(reponse) in normaliser(st.session_state.joueur):
                     st.session_state.gagne = True
-                elif st.session_state.essais >= 3:
+                elif st.session_state.essais >= 5:
                     st.session_state.perdu = True
                 else:
                     reste = 5 - st.session_state.essais

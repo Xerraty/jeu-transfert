@@ -98,7 +98,8 @@ prix = prix_millions * 1_000_000  # reconvertit en euros pour le filtre
 
 if st.button("🎲 Lancer une partie"):
     tirer_joueur(prix)
-    st.rerun()
+    if st.session_state.partie_lancee:  # ne rerun que si un joueur a été trouvé (laisse le message d'erreur (joueur trop cher))
+        st.rerun()
 
 # ── Étape 2 : Jeu ──────────────────────────────────────────
 if st.session_state.partie_lancee:

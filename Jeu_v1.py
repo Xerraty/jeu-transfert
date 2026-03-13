@@ -1,4 +1,3 @@
-import base64
 import unicodedata
 import pandas as pd
 import streamlit as st
@@ -47,9 +46,10 @@ def tirer_joueur(prix_min):
     resultat = df[df["nom_joueur"] == rdm_player][["club_depart", "club_arrivee", "date_transfert"]]
     resultat_alea = resultat.sample(3)
     resultat_tri = resultat_alea.sort_values("date_transfert", ascending=False)
+    
 
-# st.session_state est une mémoire persistante qui survit entre ces réexécutions.
-
+    # st.session_state est une mémoire persistante qui survit entre ces réexécutions.
+    st.session_state.nb_clubs_affiches = 1
     st.session_state.joueur = rdm_player
     st.session_state.clubs = resultat_tri
     st.session_state.essais = 0
@@ -79,6 +79,8 @@ if "perdu" not in st.session_state:
     st.session_state.perdu = False
 if "message" not in st.session_state:
     st.session_state.message = ""
+if "nb_clubs_affiches" not in st.session_state:
+    st.session_state.nb_clubs_affiches = 1
 
 # ============================================================
 # INTERFACE
@@ -100,10 +102,15 @@ if st.session_state.partie_lancee:
     st.markdown("---")
     st.markdown("### 🏟️ Liste des clubs :")
     clubs = st.session_state.clubs
-    for _, row in clubs.iterrows():
-        date = row["date_transfert"].strftime("%B %Y")
-        st.markdown(f"- **{row['club_depart']}** *({date})*")
-
+    for i, (_, row) in enumerate(clubs.iterrows()):
+        if i < st.session_state.nb_clubs_affiches:
+            date = row["date_transfert"].strftime("%B %Y")
+            st.markdown(f"- **{row['club_depart']}** *({date})*")
+    if st.session_state.nb_clubs_affiches < 3:
+        if st.button("👁️ Indice suivant"):
+            st.session_state.nb_clubs_affiches += 1
+            st.rerun()
+    
     st.markdown("---")
 
     # Affichage du nombre d'essais restants

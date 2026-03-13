@@ -8,7 +8,7 @@ import base64
 # CHARGEMENT DES DONNÉES
 # ============================================================
 df = pd.read_csv("transfers_clean.csv", encoding="utf-8",sep=";")
-df["transfer_date"] = pd.to_datetime(df["transfer_date"]) # transforme en format date
+df["transfer_date"] = pd.to_datetime(df["transfer_date"], dayfirst=True) # convertit la colonne "transfer_date" en format de date et en spécifiant que le jour est le premier élément de la date (dayfirst=True), ce qui permet de manipuler les dates plus facilement dans le code, par exemple pour trier les transferts par date ou calculer des durées entre les transferts.
 df = df.rename(columns={"player_name": "nom_joueur",
                         "from_club_name": "club_depart",
                         "to_club_name": "club_arrivee",
@@ -96,7 +96,7 @@ if st.button("🎲 Lancer une partie"):
 # ── Étape 2 : Jeu ──────────────────────────────────────────
 if st.session_state.partie_lancee:
     st.markdown("---")
-    st.markdown("### 🏟️ Ce joueur a été impliqué dans ces transferts :")
+    st.markdown("### 🏟️ Liste des clubs :")
     clubs = st.session_state.clubs
     for _, row in clubs.iterrows():
         date = row["date_transfert"].strftime("%B %Y")

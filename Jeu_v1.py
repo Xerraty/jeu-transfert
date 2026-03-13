@@ -151,7 +151,7 @@ if st.session_state.partie_lancee:
                 elif st.session_state.essais >= 3:
                     st.session_state.perdu = True
                 else:
-                    reste = 3 - st.session_state.essais
+                    reste = 5 - st.session_state.essais
                     st.session_state.message = f"❌ Ce n'est pas le bon joueur. Il te reste {reste} essai(s)."
                 st.rerun()
 

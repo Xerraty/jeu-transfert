@@ -42,6 +42,9 @@ def get_joueurs_filtres(prix_min):
 def tirer_joueur(prix_min):
     """Tire un joueur aléatoire et ses 3 clubs, stocke dans session_state."""
     joueurs = get_joueurs_filtres(prix_min)
+    if len(joueurs) == 0:
+        st.warning("⚠️ Aucun joueur trouvé pour ce prix. Essaie une valeur plus basse !")
+        return
     rdm_player = joueurs.sample(n=1).values[0]
     resultat = df[df["nom_joueur"] == rdm_player][["club_depart", "club_arrivee", "date_transfert"]]
     resultat_alea = resultat.sample(3)

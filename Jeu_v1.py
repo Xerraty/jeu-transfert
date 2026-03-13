@@ -88,7 +88,7 @@ if st.button("📣 Ferveur des supporters "):
     musique_fond("musique_stade.mp3")
 # ── Étape 1 : Paramètre prix ────────────────────────────────
 st.markdown("### 🎯 Paramètres")
-prix_millions = st.number_input("Valeur de marché minimale (M€)", min_value=0.1, value=10, step=1)
+prix_millions = st.number_input("Valeur de marché minimale (M€)", min_value=0.1, value=10, step=0.5)
 prix = prix_millions * 1_000_000  # reconvertit en euros pour le filtre
 
 if st.button("🎲 Lancer une partie"):

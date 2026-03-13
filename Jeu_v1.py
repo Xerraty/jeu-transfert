@@ -107,7 +107,7 @@ if st.session_state.partie_lancee:
     st.markdown("---")
 
     # Affichage du nombre d'essais restants
-    essais_restants = 3 - st.session_state.essais
+    essais_restants = 5 - st.session_state.essais
     st.markdown(f"**Essais restants : {'🟢' * essais_restants}{'🔴' * st.session_state.essais}**")
 
     # ── Fin de partie ──────────────────────────────────────

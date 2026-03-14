@@ -151,6 +151,7 @@ if st.session_state.partie_lancee:
                 st.warning("⚠️ Entre un nom avant de valider.")
             else:
                 st.session_state.essais += 1
+                nom_joueur = normaliser(st.session_state.joueur)
                 if normaliser(reponse) in nom_joueur.split() or normaliser(reponse) == normaliser(st.session_state.joueur):
                     st.session_state.gagne = True
                 elif st.session_state.essais >= 5:

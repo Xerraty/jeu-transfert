@@ -121,6 +121,11 @@ if st.session_state.partie_lancee:
     essais_restants = 5 - st.session_state.essais
     st.markdown(f"**Essais restants : {'🟢' * essais_restants}{'🔴' * st.session_state.essais}**")
 
+
+    if st.button("Abandonner la partie"):
+        st.session_state.perdu = True
+        st.rerun()
+        
     # ── Fin de partie ──────────────────────────────────────
     if st.session_state.gagne:
         if st.session_state.essais == 1:

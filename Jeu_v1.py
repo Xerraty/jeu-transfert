@@ -122,9 +122,11 @@ if st.session_state.partie_lancee:
     st.markdown(f"**Essais restants : {'🟢' * essais_restants}{'🔴' * st.session_state.essais}**")
 
 
-    if st.button("Abandonner la partie"):
-        st.session_state.perdu = True
-        st.rerun()
+    with st.popover("🏳️ Abandonner la partie"):
+        st.write("Tu es sûr de vouloir abandonner ?")
+        if st.button("✅ Oui, abandonner"):
+            st.session_state.perdu = True
+            st.rerun()
 
     # ── Fin de partie ──────────────────────────────────────
     if st.session_state.gagne:

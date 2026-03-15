@@ -126,6 +126,7 @@ if st.session_state.partie_lancee:
     st.markdown(f"**Essais restants : {'🟢' * essais_restants}{'🔴' * st.session_state.essais}**")
 
     if st.session_state.essais == 3: #INDICE NATIONALITÉ après 3 essais
+        if st.button("🌍 Indice : Nationalité"):
         nationalite = df[df["nom_joueur"] == st.session_state.joueur]["country_of_citizenship"].iloc[0]
         st.info(f"🌍 Indice : ce joueur est {nationalite}")
 

@@ -128,7 +128,7 @@ if st.session_state.partie_lancee:
     if st.session_state.essais == 3: #INDICE NATIONALITÉ après 3 essais
         if st.button("🌍 Indice : Nationalité"):
             nationalite = df[df["nom_joueur"] == st.session_state.joueur]["country_of_citizenship"].iloc[0]
-            st.info(f"🌍 Indice : ce joueur est {nationalite}")
+            st.info(f"🌍 Indice : nationalité {nationalite}")
 
     with st.popover("🏳️ Abandonner la partie"):
         st.write("Tu es sûr de vouloir abandonner ?")

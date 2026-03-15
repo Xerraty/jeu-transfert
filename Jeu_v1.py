@@ -7,6 +7,10 @@ import base64
 # CHARGEMENT DES DONNÉES
 # ============================================================
 df = pd.read_csv("transfers_clean.csv", encoding="utf-8",sep=";")
+df_joueurs = pd.read_csv("Players_clean.csv", encoding="utf-8",sep=",")
+df = df.merge(df_joueurs[['player_id', 'country_of_citizenship']], on='player_id', how='left')
+
+
 df["transfer_date"] = pd.to_datetime(df["transfer_date"], dayfirst=True) # convertit la colonne "transfer_date" en format de date et en spécifiant que le jour est le premier élément de la date (dayfirst=True), ce qui permet de manipuler les dates plus facilement dans le code, par exemple pour trier les transferts par date ou calculer des durées entre les transferts.
 df = df.rename(columns={"player_name": "nom_joueur",
                         "from_club_name": "club_depart",
@@ -121,6 +125,9 @@ if st.session_state.partie_lancee:
     essais_restants = 5 - st.session_state.essais
     st.markdown(f"**Essais restants : {'🟢' * essais_restants}{'🔴' * st.session_state.essais}**")
 
+    if st.session_state.essais == 3: #INDICE NATIONALITÉ après 3 essais
+        nationalite = df[df["nom_joueur"] == st.session_state.joueur]["country_of_citizenship"].iloc[0]
+        st.info(f"🌍 Indice : ce joueur est {nationalite}")
 
     with st.popover("🏳️ Abandonner la partie"):
         st.write("Tu es sûr de vouloir abandonner ?")
